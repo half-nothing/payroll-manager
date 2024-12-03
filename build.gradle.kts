@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.git.hooks)
     alias(libs.plugins.detekt)
     alias(libs.plugins.shadow)
+    war
 }
 
 val props = properties
@@ -28,12 +29,31 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
+    implementation(kotlin("stdlib"))
+    compileOnly(libs.servlet)
 
+    implementation(libs.taglibs.impl)
+    implementation(libs.taglibs.spec)
+
+    implementation(libs.bundles.database)
+    implementation(libs.bundles.logger)
+    implementation(libs.bundles.hutool)
+
+    testImplementation(kotlin("test"))
+    testImplementation(platform("org.junit:junit-bom:5.11.3"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.3")
+}
 
 base {
     archivesName.set(rootProject.name)
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs("src/main/resources")
+        }
+    }
 }
 
 java {
