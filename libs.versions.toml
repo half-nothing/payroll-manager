@@ -1,0 +1,13 @@
+[versions]
+kotlin = "2.0.20"
+detekt = "1.23.7"
+
+[libraries]
+
+[bundles]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+git-hooks = { id = "com.github.jakemarsden.git-hooks", version = "0.0.2" }
+shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
