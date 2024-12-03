@@ -10,6 +10,8 @@ logging-slf4j = "2.1.0-alpha1"
 hutool = "5.8.34"
 
 [libraries]
+detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
 servlet = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "servlet" }
 taglibs-impl = { module = "org.apache.taglibs:taglibs-standard-impl", version.ref = "taglibs" }
 taglibs-spec = { module = "org.apache.taglibs:taglibs-standard-spec", version.ref = "taglibs" }

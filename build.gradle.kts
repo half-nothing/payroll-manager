@@ -29,6 +29,7 @@ repositories {
 }
 
 dependencies {
+    detektPlugins(libs.detekt)
     implementation(kotlin("stdlib"))
     compileOnly(libs.servlet)
 
@@ -64,6 +65,10 @@ java {
 }
 
 tasks {
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
     withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
         options.release.set(targetJavaVersion)
