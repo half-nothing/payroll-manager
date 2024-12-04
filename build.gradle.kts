@@ -33,8 +33,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     compileOnly(libs.servlet)
 
-    implementation(libs.taglibs.impl)
-    implementation(libs.taglibs.spec)
+    implementation(libs.jstl.api)
+    implementation(libs.jstl.core)
 
     implementation(libs.bundles.database)
     implementation(libs.bundles.logger)

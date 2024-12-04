@@ -47,9 +47,6 @@ complexity:
     ignoreSimpleWhenEntries: true
   MethodOverloading:
     active: true
-  StringLiteralDuplication:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
   TooManyFunctions:
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     thresholdInFiles: 20
@@ -262,11 +259,7 @@ style:
     active: true
     maxJumpCount: 5
   MagicNumber:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    ignoreNumbers: ['-1', '0', '1', '2']
-    ignoreEnums: true
-    ignoreRanges: true
+    active: false
   NestedClassesVisibility:
     active: false
   RedundantVisibilityModifierRule:

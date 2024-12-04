@@ -18,8 +18,9 @@ object DBUtils {
             val prop = Properties()
             val configUrl: URL? = DBUtils.javaClass.classLoader.getResource("dbcpconfig.properties")
             require(configUrl != null) { "dbcpconfig.properties not found" }
-            val inputStream = FileInputStream(configUrl.path)
-            prop.load(inputStream)
+            FileInputStream(configUrl.path).use {
+                prop.load(it)
+            }
             dataSource = BasicDataSourceFactory.createDataSource(prop)
         } catch (e: Exception) {
             LOGGER.fatal(e.toString())
