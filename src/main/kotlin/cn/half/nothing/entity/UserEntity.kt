@@ -7,6 +7,7 @@ data class UserEntity(
     val username: String,
     val password: String,
     val salt: String,
+    val admin: Boolean,
     val post: String,
     val payment: PostEntity
 ) {
@@ -15,6 +16,7 @@ data class UserEntity(
         resultSet.getString("username"),
         resultSet.getString("password"),
         resultSet.getString("salt"),
+        resultSet.getBoolean("admin"),
         resultSet.getString("post"),
         PostEntity(
             resultSet.getInt("id2"),

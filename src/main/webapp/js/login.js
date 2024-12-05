@@ -50,8 +50,9 @@ submitButton.addEventListener("click", (e) => {
     }
 })
 
-window.onunload = (e) => {
-    e.preventDefault();
-    const event = new CustomEvent("LoginStateChange", {})
-    window.parent.dispatchEvent(event);
+window.onload = (e) => {
+    const form = document.getElementById("form");
+    if (Cookie.get("loginState") !== null) {
+        form.submit();
+    }
 }

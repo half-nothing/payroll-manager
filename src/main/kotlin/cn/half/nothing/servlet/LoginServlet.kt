@@ -18,9 +18,7 @@ class LoginServlet : HttpServlet() {
     }
 
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
-        request.session.removeAttribute("msg")
-        request.session.removeAttribute("username")
-        request.session.setAttribute("login", false)
+        request.session.invalidate()
         val userDao = UserDaoImpl.new()
         request.cookies.find { it.name == loginCookieName }?.let {
             val store = it.value.split(".")
@@ -28,7 +26,9 @@ class LoginServlet : HttpServlet() {
             user?.let {
                 if (SecureUtil.md5(user.password) == store[1]) {
                     request.session.setAttribute("login", true)
-                    request.getRequestDispatcher("login.jsp").forward(request, response)
+                    request.session.setAttribute("admin", user.admin)
+                    request.session.setAttribute("username", user.username)
+                    response.sendRedirect("home.jsp")
                 }
             }
             return
@@ -47,12 +47,13 @@ class LoginServlet : HttpServlet() {
                     response.addCookie(cookie)
                 }
                 request.session.setAttribute("login", true)
+                request.session.setAttribute("admin", it.admin)
                 request.session.setAttribute("username", username)
-                request.getRequestDispatcher("login.jsp").forward(request, response)
+                response.sendRedirect("home.jsp")
                 return
             }
         }
-        request.session.setAttribute("msg", "用户不存在或密码错误")
+        request.setAttribute("msg", "用户不存在或密码错误")
         request.getRequestDispatcher("login.jsp").forward(request, response)
     }
 }

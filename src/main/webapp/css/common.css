@@ -1,3 +1,10 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    text-transform: none;
+}
+
 .text-center {
     display: block !important;
     text-align: center !important;

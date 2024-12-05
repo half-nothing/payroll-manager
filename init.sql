@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `username` varchar(64) NOT NULL,
     `password` char(64)    NOT NULL,
     `salt`     char(32)    NOT NULL,
+    `admin`    tinyint(1)  NOT NULL DEFAULT FALSE,
     `post`     varchar(64) NOT NULL,
     `level`    int         NOT NULL,
     PRIMARY KEY (`id`),
