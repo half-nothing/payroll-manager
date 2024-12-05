@@ -24,8 +24,9 @@
     <div class="header">
         <a href=""><span class="link active" id="title">人员工资管理系统</span></a>
         <c:if test="${sessionScope.admin}">
-            <a href="manager.jsp"><span class="link">员工管理</span></a>
-            <a href="payment.jsp"><span class="link">工资查询</span></a>
+            <a href="<c:url value='/users/list'/>"><span class="link">员工管理</span></a>
+            <a href="payment.jsp"><span class="link">基础薪资管理</span></a>
+            <a href="post.jsp"><span class="link">岗位管理</span></a>
         </c:if>
     </div>
     <div class="body">
@@ -36,7 +37,7 @@
                 <span>${sessionScope.admin ? "管理员" : "普通员工"}</span>
             </div>
             <div class="logout-button">
-                <a href="<c:url value="/logout"/>"><span>退出登录</span></a>
+                <a href="<c:url value="/auth/logout"/>"><span>退出登录</span></a>
             </div>
         </div>
         <div class="data">

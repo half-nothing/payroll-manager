@@ -19,7 +19,7 @@
         <span id="title">人员工资管理系统</span>
     </div>
     <div class="body">
-        <form id="form" method="post" action="<c:url value="/login"/>">
+        <form id="form" method="post" action="<c:url value="/auth/login"/>">
             <p class="title">请登录</p>
             <div class="card">
                 <label class="username">
@@ -36,7 +36,7 @@
                     <input type="checkbox" name="rememberMe">
                     <span>七天内免密登录</span>
                 </label>
-                <span class="input-tips text-center"> ${empty requestScope.msg ? "" : requestScope.msg}</span>
+                <span class="input-tips text-center"> ${empty sessionScope.msg ? "" : sessionScope.msg}</span>
                 <button id="login" type="submit">登录</button>
             </div>
         </form>

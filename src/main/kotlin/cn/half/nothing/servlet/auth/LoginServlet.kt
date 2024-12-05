@@ -1,6 +1,9 @@
-package cn.half.nothing.servlet
+package cn.half.nothing.servlet.auth
 
+import cn.half.nothing.Constant.LOGIN_COOKIE_NAME
 import cn.half.nothing.dao.impl.UserDaoImpl
+import cn.half.nothing.extension.redirect
+import cn.half.nothing.extension.setSession
 import cn.half.nothing.utils.SecurityUtils
 import cn.hutool.crypto.SecureUtil
 import jakarta.servlet.annotation.WebServlet
@@ -9,26 +12,20 @@ import jakarta.servlet.http.HttpServlet
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 
-@WebServlet(urlPatterns = ["/login"])
+@WebServlet(urlPatterns = ["/auth/login"])
 class LoginServlet : HttpServlet() {
-    private val loginCookieName = "loginState"
-
-    override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
-        request.getRequestDispatcher("index.jsp").forward(request, response)
-    }
-
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         request.session.invalidate()
         val userDao = UserDaoImpl.new()
-        request.cookies.find { it.name == loginCookieName }?.let {
+        request.cookies.find { it.name == LOGIN_COOKIE_NAME }?.let {
             val store = it.value.split(".")
             val user = userDao.getUserByUsername(store[0])
             user?.let {
                 if (SecureUtil.md5(user.password) == store[1]) {
-                    request.session.setAttribute("login", true)
-                    request.session.setAttribute("admin", user.admin)
-                    request.session.setAttribute("username", user.username)
-                    response.sendRedirect("home.jsp")
+                    request.setSession("login", true)
+                        .setSession("admin", user.admin)
+                        .setSession("username", user.username)
+                    response.redirect(request, "home.jsp")
                 }
             }
             return
@@ -41,19 +38,19 @@ class LoginServlet : HttpServlet() {
             val encryptedPassword = SecurityUtils.encryptPassword(password, it.salt)
             if (encryptedPassword == user.password) {
                 rememberMe?.let {
-                    val cookie = Cookie(loginCookieName, "$username.${SecureUtil.md5(user.password)}")
+                    val cookie = Cookie(LOGIN_COOKIE_NAME, "$username.${SecureUtil.md5(user.password)}")
                     cookie.maxAge = 3600 * 24 * 7
                     cookie.path = "/"
                     response.addCookie(cookie)
                 }
-                request.session.setAttribute("login", true)
-                request.session.setAttribute("admin", it.admin)
-                request.session.setAttribute("username", username)
-                response.sendRedirect("home.jsp")
+                request.setSession("login", true)
+                    .setSession("admin", it.admin)
+                    .setSession("username", username)
+                response.redirect(request, "home.jsp")
                 return
             }
         }
-        request.setAttribute("msg", "用户不存在或密码错误")
-        request.getRequestDispatcher("login.jsp").forward(request, response)
+        request.setSession("msg", "用户不存在或密码错误")
+        response.redirect(request, "login.jsp")
     }
 }

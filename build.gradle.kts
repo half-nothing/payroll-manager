@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.bundles.database)
     implementation(libs.bundles.logger)
     implementation(libs.bundles.hutool)
+    implementation(libs.bundles.fastjson)
 
     testImplementation(kotlin("test"))
     testImplementation(platform("org.junit:junit-bom:5.11.3"))

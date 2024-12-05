@@ -3,25 +3,27 @@ package cn.half.nothing.entity
 import java.sql.ResultSet
 
 data class UserEntity(
-    val id: Int,
-    val username: String,
-    val password: String,
-    val salt: String,
-    val admin: Boolean,
-    val post: String,
-    val payment: PostEntity
+    var id: Int,
+    var nickname: String,
+    var username: String,
+    var password: String,
+    var salt: String,
+    var admin: Boolean,
+    var realPay: Double,
+    var post: PostEntity
 ) {
     constructor(resultSet: ResultSet) : this(
         resultSet.getInt("id"),
+        resultSet.getString("nickname"),
         resultSet.getString("username"),
         resultSet.getString("password"),
         resultSet.getString("salt"),
         resultSet.getBoolean("admin"),
-        resultSet.getString("post"),
-        PostEntity(
-            resultSet.getInt("id2"),
-            resultSet.getInt("level"),
-            resultSet.getInt("payment")
-        )
-    )
+        resultSet.getDouble("real_pay"),
+        PostEntity(resultSet)
+    ) {
+        if (realPay == 0.0) {
+            realPay = post.postLevel.postPayment.toDouble()
+        }
+    }
 }

@@ -2,13 +2,14 @@
 kotlin = "2.0.20"
 detekt = "1.23.7"
 servlet = "6.1.0"
-jstl-api  = "3.0.2"
+jstl-api = "3.0.2"
 jstl-core = "3.0.1"
 mysql = "9.0.0"
 db-connector = "2.12.0"
 logging-apache = "3.0.0-beta2"
 logging-slf4j = "2.1.0-alpha1"
 hutool = "5.8.34"
+fastjson = "2.0.53"
 
 [libraries]
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -29,10 +30,14 @@ logging-slf4j-impl = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", ve
 hutool-core = { module = "cn.hutool:hutool-core", version.ref = "hutool" }
 hutool-crypto = { module = "cn.hutool:hutool-crypto", version.ref = "hutool" }
 
+fastjson-core = { module = "com.alibaba.fastjson2:fastjson2", version.ref = "fastjson" }
+fastjson-kotlin = { module = "com.alibaba.fastjson2:fastjson2-kotlin", version.ref = "fastjson" }
+
 [bundles]
 database = ["mysql", "db-dbcp", "db-pool"]
 logger = ["logging-api", "logging-core", "logging-slf4j-api", "logging-slf4j-impl"]
 hutool = ["hutool-core", "hutool-crypto"]
+fastjson = ["fastjson-core", "fastjson-kotlin"]
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
