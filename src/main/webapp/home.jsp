@@ -46,6 +46,9 @@
                 <span id="time"></span>
             </div>
             <div>
+                <span>姓名：${sessionScope.user.nickname}</span>
+            </div>
+            <div>
                 <span>岗位：${sessionScope.user.post.postName}</span>
             </div>
             <div>

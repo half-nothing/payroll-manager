@@ -24,4 +24,4 @@ jobs:
           gradle-version: 8.5
 
       - name: Execute Gradle Tasks
-        run: gradle build
+        run: gradle build --stacktrace
