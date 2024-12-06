@@ -1,6 +1,6 @@
 package cn.half.nothing.servlet.post
 
-import cn.half.nothing.bean.Reply
+import cn.half.nothing.model.Reply
 import cn.half.nothing.dao.impl.PostDaoImpl
 import cn.half.nothing.entity.PostEntity
 import cn.half.nothing.extension.code

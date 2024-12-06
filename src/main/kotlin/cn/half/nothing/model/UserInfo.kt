@@ -1,4 +1,4 @@
-package cn.half.nothing.bean
+package cn.half.nothing.model
 
 import cn.half.nothing.dao.impl.PostDaoImpl
 import cn.half.nothing.dao.impl.UserDaoImpl

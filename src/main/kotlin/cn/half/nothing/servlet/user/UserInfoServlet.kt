@@ -1,7 +1,7 @@
 package cn.half.nothing.servlet.user
 
-import cn.half.nothing.bean.Reply
-import cn.half.nothing.bean.UserInfo
+import cn.half.nothing.model.Reply
+import cn.half.nothing.model.UserInfo
 import cn.half.nothing.dao.impl.PostDaoImpl
 import cn.half.nothing.dao.impl.UserDaoImpl
 import cn.half.nothing.entity.UserEntity

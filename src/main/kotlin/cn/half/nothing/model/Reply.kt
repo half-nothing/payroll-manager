@@ -1,4 +1,4 @@
-package cn.half.nothing.bean
+package cn.half.nothing.model
 
 data class Reply(
     val status: Boolean,

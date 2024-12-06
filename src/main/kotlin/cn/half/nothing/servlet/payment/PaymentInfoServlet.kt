@@ -1,6 +1,6 @@
 package cn.half.nothing.servlet.payment
 
-import cn.half.nothing.bean.Reply
+import cn.half.nothing.model.Reply
 import cn.half.nothing.dao.impl.PaymentDaoImpl
 import cn.half.nothing.entity.PaymentEntity
 import cn.half.nothing.extension.code
