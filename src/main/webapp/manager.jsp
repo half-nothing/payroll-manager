@@ -14,6 +14,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/manager.js"></script>
     <script>
+        axios.defaults.baseURL = "${pageContext.request.contextPath}"
+        url = "${pageContext.request.contextPath}/users/list"
         <c:if test="${!sessionScope.login}">
         window.location = "login.jsp"
         </c:if>

@@ -16,12 +16,9 @@ fun HttpServletResponse.json(data: Any) {
 }
 
 fun HttpServletResponse.redirect(request: HttpServletRequest, path: String) {
-    val fullUrl = request.requestURL
-    var rootUrl = fullUrl.substring(0, fullUrl.indexOf(request.servletPath))
-    if (!path.startsWith("/") && !rootUrl.endsWith("/")) {
-        rootUrl += "/"
-    }
-    this.sendRedirect(rootUrl + path)
+    val rootUrl = request.requestURL.toString().substringBefore(request.servletPath)
+    val finalPath = if (path.startsWith("/") || rootUrl.endsWith("/")) path else "/$path"
+    this.sendRedirect(rootUrl + finalPath)
 }
 
 fun HttpServletResponse.removeCookie(key: String): HttpServletResponse {

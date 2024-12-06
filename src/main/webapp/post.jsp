@@ -13,16 +13,16 @@
     <link href="css/layout.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/post.js"></script>
-    <c:if test="${!sessionScope.login}">
-        <script>
-            window.location = "login.jsp"
-        </script>
-    </c:if>
-    <c:if test="${!sessionScope.user.admin}">
-        <script>
-            window.location = "home.jsp"
-        </script>
-    </c:if>
+    <script>
+        axios.defaults.baseURL = "${pageContext.request.contextPath}"
+        url = "${pageContext.request.contextPath}/posts/list"
+        <c:if test="${!sessionScope.login}">
+        window.location = "login.jsp"
+        </c:if>
+        <c:if test="${!sessionScope.user.admin}">
+        window.location = "home.jsp"
+        </c:if>
+    </script>
 </head>
 <body>
 <div id="overlay">

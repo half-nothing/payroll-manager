@@ -1,4 +1,6 @@
 let data;
+let url;
+
 let level;
 let payment;
 
@@ -30,7 +32,7 @@ async function submitAndHidePopup() {
     } else {
         await axios.post(`/payments/info`, data);
     }
-    window.location = "/payments/list";
+    window.location = url;
 }
 
 
@@ -58,5 +60,5 @@ async function editPayment(paymentId) {
  */
 async function deletePayment(paymentId) {
     await axios.delete(`/payments/${paymentId}`);
-    window.location = "/payments/list";
+    window.location = url;
 }

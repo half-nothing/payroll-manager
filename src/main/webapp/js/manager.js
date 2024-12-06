@@ -1,4 +1,5 @@
 let data = undefined;
+let url;
 
 let username;
 let name;
@@ -46,7 +47,7 @@ async function submitAndHidePopup() {
     } else {
         await axios.post(`/users/info`, data);
     }
-    window.location = "/users/list";
+    window.location = url;
 }
 
 /**
@@ -71,7 +72,7 @@ async function editUser(userId) {
  */
 async function deleteUser(userId) {
     await axios.delete(`/users/${userId}`);
-    window.location = "/users/list";
+    window.location = url;
 }
 
 /**

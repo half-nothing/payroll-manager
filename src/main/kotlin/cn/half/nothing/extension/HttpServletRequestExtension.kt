@@ -8,11 +8,7 @@ fun HttpServletRequest.setSession(key: String, value: Any): HttpServletRequest {
     return this
 }
 
-fun HttpServletRequest.getPathParameter(): String? {
-    return pathInfo?.let {
-        pathInfo.substring(1)
-    }
-}
+fun HttpServletRequest.getPathParameter(): String? = pathInfo?.takeIf { it.length > 1 }?.substring(1)
 
 fun HttpServletRequest.getBody(): String = buildString { reader.forEachLine { append(it) } }
 

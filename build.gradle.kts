@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.git.hooks)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.shadow)
     war
 }
 
@@ -79,8 +78,23 @@ tasks {
         compilerOptions.jvmTarget.set(JvmTarget.fromTarget(targetJavaVersion.toString()))
     }
 
-    test {
-        useJUnitPlatform()
+    withType<War> {
+        manifest {
+            attributes(
+                "Build-By" to System.getProperty("user.name"),
+                "Build-TimeStamp" to SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(Date()),
+                "Build-Version" to version,
+                "Created-By" to "Gradle ${gradle.gradleVersion}",
+                "Build-Jdk" to "${System.getProperty("java.version")} " +
+                        "(${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")})",
+                "Build-OS" to "${System.getProperty("os.name")} " +
+                        "${System.getProperty("os.arch")} ${System.getProperty("os.version")}"
+            )
+        }
+    }
+
+    named<Jar>("sourcesJar") {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 
     jar {
