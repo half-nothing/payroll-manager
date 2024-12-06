@@ -2,14 +2,14 @@ package cn.half.nothing.entity
 
 import java.sql.ResultSet
 
-data class PostLevelEntity(
+data class PaymentEntity(
     var id: Int,
-    var postLevel: String,
-    var postPayment: Int
+    var name: String,
+    var payment: Double
 ) {
     constructor(resultSet: ResultSet) : this(
         resultSet.getInt("level_id"),
         resultSet.getString("level"),
-        resultSet.getInt("payment")
+        resultSet.getDouble("payment")
     )
 }

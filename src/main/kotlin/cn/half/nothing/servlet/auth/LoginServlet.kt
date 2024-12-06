@@ -19,12 +19,10 @@ class LoginServlet : HttpServlet() {
         val userDao = UserDaoImpl.new()
         request.cookies.find { it.name == LOGIN_COOKIE_NAME }?.let {
             val store = it.value.split(".")
-            val user = userDao.getUserByUsername(store[0])
+            val user = userDao.getByUsername(store[0])
             user?.let {
                 if (SecureUtil.md5(user.password) == store[1]) {
-                    request.setSession("login", true)
-                        .setSession("admin", user.admin)
-                        .setSession("username", user.username)
+                    request.setSession("login", true).setSession("user", user)
                     response.redirect(request, "home.jsp")
                 }
             }
@@ -33,7 +31,7 @@ class LoginServlet : HttpServlet() {
         val username = request.getParameter("username")
         val password = request.getParameter("password")
         val rememberMe = request.getParameter("rememberMe")
-        val user = userDao.getUserByUsername(username)
+        val user = userDao.getByUsername(username)
         user?.let {
             val encryptedPassword = SecurityUtils.encryptPassword(password, it.salt)
             if (encryptedPassword == user.password) {
@@ -43,9 +41,7 @@ class LoginServlet : HttpServlet() {
                     cookie.path = "/"
                     response.addCookie(cookie)
                 }
-                request.setSession("login", true)
-                    .setSession("admin", it.admin)
-                    .setSession("username", username)
+                request.setSession("login", true).setSession("user", user)
                 response.redirect(request, "home.jsp")
                 return
             }

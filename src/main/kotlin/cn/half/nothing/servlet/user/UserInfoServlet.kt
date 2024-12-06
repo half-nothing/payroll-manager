@@ -24,7 +24,7 @@ class UserInfoServlet : HttpServlet() {
             return
         }
         val userDao = UserDaoImpl.new()
-        val userEntity = userDao.getUserById(userId.toInt())
+        val userEntity = userDao.getById(userId.toInt())
         if (userEntity == null) {
             response.code(HttpServletResponse.SC_NOT_FOUND).json(Reply.fail("User not found"))
             return

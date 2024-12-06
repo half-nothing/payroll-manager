@@ -8,7 +8,7 @@ import java.sql.Statement
 import javax.sql.DataSource
 
 class UserDaoImpl(private val dataSource: DataSource) : UserDao {
-    override fun getUserById(id: Int): UserEntity? {
+    override fun getById(id: Int): UserEntity? {
         dataSource.connection.useCommit {
             val statement =
                 it.prepareStatement(
@@ -35,7 +35,7 @@ class UserDaoImpl(private val dataSource: DataSource) : UserDao {
         }
     }
 
-    override fun getUserByUsername(username: String): UserEntity? {
+    override fun getByUsername(username: String): UserEntity? {
         dataSource.connection.useCommit {
             val statement = it.prepareStatement(
                 """
@@ -77,14 +77,12 @@ class UserDaoImpl(private val dataSource: DataSource) : UserDao {
                         INNER JOIN `users` ON `posts`.`id` = `users`.`post`
                 """.trimIndent()
             )
-            return with(statement) {
-                val resultSet = statement.executeQuery()
-                val userEntities = mutableListOf<UserEntity>()
-                while (resultSet.next()) {
-                    userEntities.add(UserEntity(resultSet))
-                }
-                userEntities
+            val resultSet = statement.executeQuery()
+            val userEntities = mutableListOf<UserEntity>()
+            while (resultSet.next()) {
+                userEntities.add(UserEntity(resultSet))
             }
+            return userEntities
         }
     }
 
@@ -128,9 +126,9 @@ class UserDaoImpl(private val dataSource: DataSource) : UserDao {
             val statement = it.prepareStatement(
                 """
                     INSERT INTO `users`(`nickname`, `username`, `password`, `salt`, `admin`, `post`, `real_pay`)
-                    VALUES(?, ?, ?, ?, ?, ?, ?)
+                    VALUE(?, ?, ?, ?, ?, ?, ?)
                 """.trimIndent(),
-                Statement.RETURN_GENERATED_KEYS
+                    Statement.RETURN_GENERATED_KEYS
             )
             return with(statement) {
                 setString(1, user.nickname)

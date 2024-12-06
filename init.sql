@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `levels`
 (
     `id`      int     NOT NULL AUTO_INCREMENT,
     `level`   char(8) NOT NULL,
-    `payment` int     NOT NULL,
+    `payment` double  NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `level` (`level`) USING BTREE
 );

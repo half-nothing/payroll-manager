@@ -9,7 +9,7 @@ data class UserInfo(
     val nickName: String,
     val username: String,
     val postLevel: String,
-    val postPayment: Int,
+    val postPayment: Double,
     val postName: String,
     val realPayment: Double,
     val admin: Boolean
@@ -18,8 +18,8 @@ data class UserInfo(
         userEntity.id,
         userEntity.nickname,
         userEntity.username,
-        userEntity.post.postLevel.postLevel,
-        userEntity.post.postLevel.postPayment,
+        userEntity.post.postLevel.name,
+        userEntity.post.postLevel.payment,
         userEntity.post.postName,
         userEntity.realPay,
         userEntity.admin
@@ -27,7 +27,7 @@ data class UserInfo(
 
     fun toUserEntity(): UserEntity? {
         val userDao = UserDaoImpl.new()
-        val userEntity = userDao.getUserById(id)
+        val userEntity = userDao.getById(id)
         userEntity ?: return null
         userEntity.nickname = nickName
         userEntity.username = username

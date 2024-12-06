@@ -11,14 +11,13 @@
     <title>人员工资管理系统-员工管理</title>
     <link href="css/common.css" rel="stylesheet" type="text/css">
     <link href="css/layout.css" rel="stylesheet" type="text/css">
-    <link href="css/manager.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/manager.js"></script>
     <script>
         <c:if test="${!sessionScope.login}">
         window.location = "login.jsp"
         </c:if>
-        <c:if test="${!sessionScope.admin}">
+        <c:if test="${!sessionScope.user.admin}">
         window.location = "home.jsp"
         </c:if>
     </script>
@@ -62,9 +61,9 @@
 <div class="container">
     <div class="header">
         <a href="home.jsp"><span class="link" id="title">人员工资管理系统</span></a>
-        <a href=""><span class="link active">员工管理</span></a>
-        <a href="payment.jsp"><span class="link">基础薪资管理</span></a>
-        <a href="post.jsp"><span class="link">岗位管理</span></a>
+        <a href="<c:url value='/users/list'/>"><span class="link">员工管理</span></a>
+        <a href="<c:url value='/payments/list'/>"><span class="link">基础薪资管理</span></a>
+        <a href="<c:url value='/posts/list'/>"><span class="link">岗位管理</span></a>
     </div>
     <div class="body">
         <table>
@@ -86,8 +85,8 @@
                 <tr>
                     <td>${user.nickname}</td>
                     <td>${user.post.postName}</td>
-                    <td>${user.post.postLevel.postLevel}</td>
-                    <td>${user.post.postLevel.postPayment}</td>
+                    <td>${user.post.postLevel.name}</td>
+                    <td>${user.post.postLevel.payment}</td>
                     <td>${user.realPay}</td>
                     <td>
                         <button class="editButton" onclick="editUser(${user.id})">编辑</button>

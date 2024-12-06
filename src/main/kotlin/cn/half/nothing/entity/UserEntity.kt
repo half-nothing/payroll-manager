@@ -23,7 +23,7 @@ data class UserEntity(
         PostEntity(resultSet)
     ) {
         if (realPay == 0.0) {
-            realPay = post.postLevel.postPayment.toDouble()
+            realPay = post.postLevel.payment
         }
     }
 }

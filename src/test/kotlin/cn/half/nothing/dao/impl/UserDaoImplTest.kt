@@ -8,17 +8,17 @@ import kotlin.test.assertNotNull
 class UserDaoImplTest {
 
     @Test
-    fun getUserById() {
+    fun getById() {
         val userDao = UserDaoImpl.new()
-        val userEntity = userDao.getUserById(1)
+        val userEntity = userDao.getById(1)
         assertNotNull(userEntity)
         println(userEntity)
     }
 
     @Test
-    fun getUserByUsername() {
+    fun getByUsername() {
         val userDao = UserDaoImpl.new()
-        val userEntity = userDao.getUserByUsername("Half_nothing")
+        val userEntity = userDao.getByUsername("Half_nothing")
         assertNotNull(userEntity)
         println(userEntity)
     }
@@ -36,7 +36,7 @@ class UserDaoImplTest {
     @Test
     fun updateUser() {
         val userDao = UserDaoImpl.new()
-        val userEntity = userDao.getUserById(1)
+        val userEntity = userDao.getById(1)
         assertNotNull(userEntity)
         userEntity.admin = true
         assertEquals(userDao.updateUser(userEntity), 1)
@@ -51,7 +51,7 @@ class UserDaoImplTest {
     @Test
     fun insertUser() {
         val userDao = UserDaoImpl.new()
-        val userEntity = userDao.getUserById(5)
+        val userEntity = userDao.getById(5)
         assertNotNull(userEntity)
         userEntity.admin = true
         userEntity.username = SecurityUtils.getSalt()

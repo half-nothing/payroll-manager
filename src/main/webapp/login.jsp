@@ -24,12 +24,12 @@
             <div class="card">
                 <label class="username">
                     <span>账号</span>
-                    <input id="username" name="username" value="请输入用户名">
+                    <input id="username" name="username" placeholder="请输入用户名">
                     <span id="username-span" class="input-tips"></span>
                 </label>
                 <label class="password">
                     <span>密码</span>
-                    <input id="password" name="password" value="" type="password">
+                    <input id="password" name="password" placeholder="请输入密码" type="password">
                     <span id="password-span" class="input-tips"></span>
                 </label>
                 <label class="remember-me">

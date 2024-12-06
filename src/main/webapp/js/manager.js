@@ -32,10 +32,10 @@ function showPopup() {
 
 function hidePopup() {
     document.getElementById("overlay").style.display = "none";
-    window.location = "/users/list";
 }
 
 async function submitAndHidePopup() {
+    hidePopup();
     data.username = username.value;
     data.nickName = name.value;
     data.postName = post.value;
@@ -46,7 +46,7 @@ async function submitAndHidePopup() {
     } else {
         await axios.post(`/users/info`, data);
     }
-    hidePopup();
+    window.location = "/users/list";
 }
 
 /**
